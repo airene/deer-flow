@@ -55,7 +55,7 @@ async def scan_skill_content(content: str, *, executable: bool = False, location
                 {"role": "system", "content": rubric},
                 {"role": "user", "content": prompt},
             ],
-            config={"run_name": "security_agent"}
+            config={"run_name": "security_agent"},
         )
         parsed = _extract_json_object(str(getattr(response, "content", "") or ""))
         if parsed and parsed.get("decision") in {"allow", "warn", "block"}:
