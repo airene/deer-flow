@@ -49,6 +49,8 @@ def test_generate_suggestions_parses_and_limits(monkeypatch):
     result = asyncio.run(suggestions.generate_suggestions("t1", req))
 
     assert result.suggestions == ["Q1", "Q2", "Q3"]
+    fake_model.ainvoke.assert_awaited_once()
+    assert fake_model.ainvoke.await_args.kwargs["config"] == {"run_name": "suggest_agent"}
 
 
 def test_generate_suggestions_parses_list_block_content(monkeypatch):
